@@ -35,7 +35,7 @@ const memeLoader = function(){
                 img.classList.add('normal_img')
                 // img.classList.add('hover')
                 h4.textContent=body.data.children[i].data.title.slice(0,50)
-                console.log(`${body.data.children[i].data.permalink}`);
+                console.log(`https://www.reddit.com${body.data.children[i].data.permalink}`);
                 h4.setAttribute('href',`https://www.reddit.com${body.data.children[i].data.permalink}`)
                 div.appendChild(h4);div.appendChild(img)
                 div.classList.add('meme-section');
@@ -46,7 +46,7 @@ const memeLoader = function(){
     })
 }
 
-// memeLoader()
+memeLoader()
 const memeBtn = document.querySelector('.memes-button');
 memeBtn.addEventListener('click',function(e){
     memeLoader()
@@ -85,7 +85,7 @@ next.addEventListener('click',function(e){
                 img.classList.add('normal_img')
                 // img.classList.add('hover')
                 h4.textContent=body.data.children[i].data.title.slice(0,50)
-                console.log(`${body.data.children[i].data.permalink}`);
+                console.log(`https://www.reddit.com${body.data.children[i].data.permalink}`);
                 h4.setAttribute('href',`https://www.reddit.com${body.data.children[i].data.permalink}`)
                 div.appendChild(h4);div.appendChild(img)
                 div.classList.add('meme-section');
