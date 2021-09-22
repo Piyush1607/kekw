@@ -26,8 +26,19 @@ body{
     flex-wrap: wrap;
 }
 
-.next{
-    display: none;
+.btn-next{
+    /* margin-left: 40%; */
+    /* margin-right: 50%; */
+    color: rgb(211, 20, 20);
+    /* transform: translate(400%, 0%); */
+    width: fit-content;
+    background-color:#fff;
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    display: inline-block;
+    align-self: center  ;
+    display:none;
 }
 .meme-section{
     padding: 20px;
