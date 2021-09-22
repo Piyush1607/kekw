@@ -29,6 +29,7 @@ const memeLoader = function(){
             if(body.data.children[i].data.post_hint==='image'){
                 let div = document.createElement('div')
                 let h4 = document.createElement('a')
+                h4.classList.add('links')
                 let img = document.createElement('img')
                 img.src=body.data.children[i].data.url_overridden_by_dest
                 img.classList.add('normal_img')
@@ -52,6 +53,12 @@ memeBtn.addEventListener('click',function(e){
 })
 
 
+document.body.addEventListener('click',function(e){
+    if(e.target.classList.contains('links')){
+        e.preventDefault()
+        window.open(e.target.href,'_blank')
+    }
+})
 
 next.addEventListener('click',function(e){
     let url = `https://www.reddit.com/r/${nextPage}.json?after=${after}`

@@ -25,7 +25,9 @@ body{
     display: inline-flex;
     flex-wrap: wrap;
 }
-
+.links{
+    color: initial;
+}
 .btn-next{
     /* margin-left: 40%; */
     /* margin-right: 50%; */
