@@ -34,7 +34,7 @@ const memeLoader = function(){
                 img.src=body.data.children[i].data.url_overridden_by_dest
                 img.classList.add('normal_img')
                 // img.classList.add('hover')
-                h4.textContent=body.data.children[i].data.title.slice(0,50)
+                h4.textContent=body.data.children[i].data.title.slice(0,50).toUpperCase()
                 console.log(`https://www.reddit.com${body.data.children[i].data.permalink}`);
                 h4.setAttribute('href',`https://www.reddit.com${body.data.children[i].data.permalink}`)
                 div.appendChild(h4);div.appendChild(img)
