@@ -2,7 +2,11 @@
 let after= ''
 let next = document.querySelector('.btn-next');
 let nextPage=''
-let sub = ["waifu","waifusgonewild","memes","dankinindia","dankmemes","dank","memes","okbhaibudbak","2Asia4u"];
+let sub = 
+["woosh","arabfunny","memes","dank","dankinindia","IndianDankMemes","okbhaibudbak","dankruto","indianpeoplefacebook","memes","indianpeoplelinkedin","dankrishu"
+,"dankmemes","2Asia4u","SaimanSays","cringe","funny","HistoryMemes",
+"ShitPostCrusaders","starterpacks","wholesomememes"];
+
 // let subr = sub[Math.floor(Math.random()*sub.length)]
 let waifus =["Waifu","RealGirls","waifusgonewild"];
 const memeLoader = function(){
