@@ -1,60 +1,69 @@
-
 let after= ''
 let next = document.querySelector('.btn-next');
 let nextPage=''
-let sub = 
-["woosh","arabfunny","memes","dank","dankinindia","IndianDankMemes","okbhaibudbak","dankruto","indianpeoplefacebook","memes","indianpeoplelinkedin","dankrishu"
+
+const parentDiv=document.getElementById('memes')
+const memeBtn = document.querySelector('.memes-button');
+
+const sub = ["woosh","arabfunny","memes","dank","dankinindia","IndianDankMemes","okbhaibudbak","dankruto","indianpeoplefacebook","memes","indianpeoplelinkedin","dankrishu"
 ,"dankmemes","2Asia4u","SaimanSays","cringe","funny","HistoryMemes",
 "ShitPostCrusaders","starterpacks","wholesomememes"];
 
-// let subr = sub[Math.floor(Math.random()*sub.length)]
-let waifus =["Waifu","RealGirls","waifusgonewild"];
-const memeLoader = function(){
+const waifus =["Waifu","RealGirls","waifusgonewild"];
+
+
+const loadmemes= async function(url) {
+    const data = await fetch(url)
+    const body = await data.json()
+
+    after = body.data.after;
+
+    let markup = body.data.children
+    .filter(meme=>meme.data.post_hint==='image')
+    .map(meme=>{
+        return `
+        <div class="meme-section">
+            <a class="links" href="${`https://www.reddit.com${meme.data.permalink}`}">${meme.data.title.slice(0, 50).toUpperCase()}</a>
+            <img src="${meme.data.url_overridden_by_dest}" class="normal_img">
+        </div>
+        `
+    }).join('')
+
+    parentDiv.innerHTML=markup
+    document.body.appendChild(parentDiv);
+}
+
+
+const displayMemes = async function(){
+
     
-    if(document.getElementById('memes')){
-        document.getElementById('memes').remove()
-    }
+    parentDiv.innerHTML=''
+    
     next.style.display='initial'
     let subr = sub[Math.floor(Math.random()*sub.length)]
-    let parentDiv = document.createElement('div');
-    parentDiv.id='memes'
     nextPage=subr
     
     let url=`https://www.reddit.com/r/${subr}.json?after=`
-    // console.log(url);
-
-    fetch(url)
-    .then(res=>res.json())
-    .then(body=>{
-        after=body.data.after
-        // console.log(after);
-        // console.log(body.data);
-        for(let i=0;i<body.data.children.length;i++){
-            if(body.data.children[i].data.post_hint==='image'){
-                let div = document.createElement('div')
-                let h4 = document.createElement('a')
-                h4.classList.add('links')
-                let img = document.createElement('img')
-                img.src=body.data.children[i].data.url_overridden_by_dest
-                img.classList.add('normal_img')
-                // img.classList.add('hover')
-                h4.textContent=body.data.children[i].data.title.slice(0,50).toUpperCase()
-                console.log(`https://www.reddit.com${body.data.children[i].data.permalink}`);
-                h4.setAttribute('href',`https://www.reddit.com${body.data.children[i].data.permalink}`)
-                div.appendChild(h4);div.appendChild(img)
-                div.classList.add('meme-section');
-                parentDiv.appendChild(div)
-            }
-        }
-        document.body.appendChild(parentDiv)
-    })
+    
+    await loadmemes(url);
+    
 }
 
-memeLoader()
-const memeBtn = document.querySelector('.memes-button');
-memeBtn.addEventListener('click',function(e){
-    memeLoader()
+next.addEventListener('click', async function(){
+    let url = `https://www.reddit.com/r/${nextPage}.json?after=${after}`
+
+    parentDiv.innerHTML=''
+
+    next.style.display='initial'
+    
+    await loadmemes(url);
+    
 })
+
+displayMemes()
+
+
+memeBtn.addEventListener('click',displayMemes)
 
 
 document.body.addEventListener('click',function(e){
@@ -64,39 +73,3 @@ document.body.addEventListener('click',function(e){
     }
 })
 
-next.addEventListener('click',function(e){
-    let url = `https://www.reddit.com/r/${nextPage}.json?after=${after}`
-    if(document.getElementById('memes')){
-        document.getElementById('memes').remove()
-    }
-    next.style.display='initial'
-    let subr = sub[Math.floor(Math.random()*sub.length)]
-    let parentDiv = document.createElement('div');
-    parentDiv.id='memes'
-    
-    fetch(url)
-    .then(res=>res.json())
-    .then(body=>{
-        after=body.data.after
-        // console.log(after);
-        // console.log(body.data);
-        for(let i=0;i<body.data.children.length;i++){
-            if(body.data.children[i].data.post_hint==='image'){
-                let div = document.createElement('div')
-                let h4 = document.createElement('a')
-                let img = document.createElement('img')
-                img.src=body.data.children[i].data.url_overridden_by_dest
-                img.classList.add('normal_img')
-                // img.classList.add('hover')
-                h4.textContent=body.data.children[i].data.title.slice(0,50)
-                console.log(`https://www.reddit.com${body.data.children[i].data.permalink}`);
-                h4.setAttribute('href',`https://www.reddit.com${body.data.children[i].data.permalink}`)
-                div.appendChild(h4);div.appendChild(img)
-                div.classList.add('meme-section');
-                parentDiv.appendChild(div)
-            }
-        }
-        document.body.appendChild(parentDiv)
-    })
-    
-})
