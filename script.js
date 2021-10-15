@@ -1,7 +1,10 @@
 let after= ''
+let page=1;
 let next = document.querySelector('.btn-next');
 let nextPage=''
 
+const overlay=document.querySelector('.overlay')
+const overalyImg=overlay.querySelector('img')
 const parentDiv=document.getElementById('memes')
 const memeBtn = document.querySelector('.memes-button');
 
@@ -24,7 +27,7 @@ const loadmemes= async function(url) {
         return `
         <div class="meme-section">
             <a class="links" href="${`https://www.reddit.com${meme.data.permalink}`}">${meme.data.title.slice(0, 50).toUpperCase()}</a>
-            <img src="${meme.data.url_overridden_by_dest}" class="normal_img">
+            <img src="${meme.data.url_overridden_by_dest}" class="normal_img crossorigin">
         </div>
         `
     }).join('')
@@ -50,6 +53,7 @@ const displayMemes = async function(){
 }
 
 next.addEventListener('click', async function(){
+    page++;
     let url = `https://www.reddit.com/r/${nextPage}.json?after=${after}`
 
     parentDiv.innerHTML=''
@@ -73,3 +77,15 @@ document.body.addEventListener('click',function(e){
     }
 })
 
+parentDiv.addEventListener('click',function(e){
+    const img = e.target.closest('.normal_img')
+    if(!img) return
+    overlay.classList.toggle('hidden')
+    overalyImg.src=img.src
+
+})
+
+overlay.addEventListener('click',function(){
+    console.log(this)
+    this.classList.toggle('hidden')
+})
