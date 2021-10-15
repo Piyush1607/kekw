@@ -96,7 +96,6 @@ img{
 .overlay {
     position: fixed;
     top: 0;
-    align-items: center;
     left: 0;
     width: 100%;
     height: 100%;
@@ -104,13 +103,12 @@ img{
     backdrop-filter: blur(4px);
     z-index: 100;
     transition: all 0.5s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .overlay img{
-    display: block;
-    margin-top: 10%;
-    margin-left: 35%;
-    /* margin-right:300%; */
     height: 60%;
 }
 
@@ -133,12 +131,8 @@ img{
     }
 
     .overlay img{
-        display: block;
-        margin-top: 40%;
-        margin-left: 25%;
-        /* margin-right:300%; */
         height:fit-content;
-        transform: scale(1.2);
+        transform: scale(1.5);
     }
 
     .meme-section{
