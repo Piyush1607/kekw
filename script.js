@@ -77,6 +77,7 @@ document.body.addEventListener('click',function(e){
     }
 })
 
+
 parentDiv.addEventListener('click',function(e){
     const img = e.target.closest('.normal_img')
     if(!img) return
@@ -86,6 +87,5 @@ parentDiv.addEventListener('click',function(e){
 })
 
 overlay.addEventListener('click',function(){
-    console.log(this)
     this.classList.toggle('hidden')
 })
